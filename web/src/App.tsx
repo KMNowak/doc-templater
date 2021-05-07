@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import printJS from 'print-js'
 import { Button, Form, Input, Typography } from 'antd'
 import './App.css'
+import { ImageUploader } from './imageUploader/ImageUploader'
 
 const LOCALHOST_SERVER_URL = 'http://localhost:3001/';
 
@@ -22,7 +23,7 @@ function App() {
     })
   }
 
-  const onClickFill = (input1: string) => {
+  const onClickFill = (input1: string = 'placeholder') => {
     return fetch(LOCALHOST_SERVER_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -65,6 +66,7 @@ function App() {
         >
           Merge PDFs
         </Button>
+        <ImageUploader />
       </main>
     </body>
   )

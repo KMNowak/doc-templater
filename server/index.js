@@ -1,11 +1,13 @@
 const PDFMerger = require('pdf-merger-js');
 const express = require('express');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 const PizZip = require('pizzip');
 const Docxtemplater = require('docxtemplater');
 
 const app = express()
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json({ extended: true }));
+app.use(cors());
 const port = 3001
 
 const mergePDFs = async () => {
@@ -23,10 +25,6 @@ app.get('/', async (req, res) => {
 })
 
 app.post('/', async (req, res) => {
-  const { input1 } = req.body;
-
-  console.log(req.body);
-
   res.status(200)
 })
 
