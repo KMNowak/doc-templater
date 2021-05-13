@@ -32,8 +32,7 @@ app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
 })
 
-//
-// TODO: Image to PDF
-// TODO: Docx to PDF with Microsoft 365
-// TODO:
+// TODO: Image to PDF DONE
+// TODO: Docx to PDF with custom lambda
+// TODO: Merge pdfs on a client side
 

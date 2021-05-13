@@ -1,0 +1,10 @@
+{
+  "name": "converter",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "aws-sdk": "^2.905.0",
+    "lambdafs": "^2.0.3"
+  }
+}
