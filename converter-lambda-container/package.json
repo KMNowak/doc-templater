@@ -1,0 +1,17 @@
+{
+  "name": "doc-2-pdf-lambda-container",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "docker build --no-cache -t doc-2-pdf-lambda-container .",
+    "dev": "docker run -p 9000:8080 doc-2-pdf-lambda-container:latest"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "aws-sdk": "^2.931.0",
+    "lambdafs": "^2.0.3"
+  }
+}
