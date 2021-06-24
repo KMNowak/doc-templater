@@ -12,6 +12,8 @@
   "license": "ISC",
   "dependencies": {
     "aws-sdk": "^2.931.0",
+    "http-status-codes": "^2.1.4",
+    "joi": "^17.4.0",
     "lambdafs": "^2.0.3"
   }
 }

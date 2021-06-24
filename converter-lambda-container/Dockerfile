@@ -1,9 +1,8 @@
-FROM amazon/aws-lambda-nodejs:12
+FROM amazon/aws-lambda-nodejs:14
 
-COPY app.js package*.json ./
+COPY *.js package*.json ./
 COPY lo.tar.br lo.tar.br
 
 RUN npm install
-
 
 CMD [ "app.lambdaHandler" ]
