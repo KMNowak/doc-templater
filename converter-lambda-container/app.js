@@ -6,7 +6,6 @@ const { getReasonPhrase, StatusCodes } = require('http-status-codes');
 const { paramsSchema } = require('./validation');
 const { logInfo, logError } = require('./logger');
 
-// TODO: add detailed docs
 // TODO: ask for CR in developers
 
 const s3 = new AWS.S3({ apiVersion: '2006-03-01' });
