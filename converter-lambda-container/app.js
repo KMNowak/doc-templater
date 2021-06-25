@@ -6,8 +6,6 @@ const { getReasonPhrase, StatusCodes } = require('http-status-codes');
 const { paramsSchema } = require('./validation');
 const { logInfo, logError } = require('./logger');
 
-// TODO: ask for CR in developers
-
 const s3 = new AWS.S3({ apiVersion: '2006-03-01' });
 
 const getResponse = (statusCode, body) => ({
@@ -25,7 +23,7 @@ const decompressLibreOffice = async (isLibreOfficeDecompressed, setIsLibreOffice
 
       setIsLibreOfficeDecompressed(true);
 
-      logInfo(`Output of brotli decompression: ${decompressed}`);
+      logInfo(`Output of brotli decompression: ${JSON.stringify(decompressed)}`);
     } catch (error) {
       throw error;
     }
@@ -101,9 +99,9 @@ module.exports.lambdaHandler = async (event) => {
       outFileName,
       targetBucketName,
     });
-  } catch (e) {
+  } catch (error) {
     getResponse(StatusCodes.INTERNAL_SERVER_ERROR, {
-      error: e,
+      error,
       message: getReasonPhrase(StatusCodes.INTERNAL_SERVER_ERROR),
     });
   }
