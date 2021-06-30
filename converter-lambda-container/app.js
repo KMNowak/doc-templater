@@ -35,8 +35,8 @@ const setIsLibreOfficeDecompressed = (value) => isLibreOfficeDecompressed = valu
 
 module.exports.lambdaHandler = async (event) => {
   try {
-    // accept both direct events and HTTP GET
-    const params = event.queryStringParameters || event;
+    // accept both direct events and HTTP POST from APIGateway
+    const params = event.body ? JSON.parse(event.body) : event;
 
     const { error } = paramsSchema.validate(params);
 
@@ -57,8 +57,11 @@ module.exports.lambdaHandler = async (event) => {
     }
 
     const { sourceBucketName, fileName, targetBucketName } = params;
-
-    const fileData = await s3.getObject({ Bucket: sourceBucketName, Key: fileName }).promise();
+    const fileData = await s3.getObject({ Bucket: sourceBucketName, Key: fileName })
+      .promise()
+      .catch(e => {
+        throw e;
+      });
 
     logInfo('S3 file loaded');
 
@@ -89,7 +92,10 @@ module.exports.lambdaHandler = async (event) => {
       Body: fileB64data,
       Key: outFileName,
       ACL: params.ACL || 'private',
-    }).promise();
+    }).promise()
+      .catch(e => {
+        throw e;
+      });
 
     fs.rmdirSync(SOURCE_FILE_PATH, { recursive: true });
     fs.rmdirSync(OUT_FILE_PATH, { recursive: true });
@@ -100,7 +106,7 @@ module.exports.lambdaHandler = async (event) => {
       targetBucketName,
     });
   } catch (error) {
-    getResponse(StatusCodes.INTERNAL_SERVER_ERROR, {
+    return getResponse(StatusCodes.INTERNAL_SERVER_ERROR, {
       error,
       message: getReasonPhrase(StatusCodes.INTERNAL_SERVER_ERROR),
     });
