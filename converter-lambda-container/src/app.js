@@ -18,7 +18,7 @@ const decompressLibreOffice = async (isLibreOfficeDecompressed, setIsLibreOffice
   if (!isLibreOfficeDecompressed) {
     try {
       let decompressed = {
-        file: await lambdafs.inflate('lo.tar.br'),
+        file: await lambdafs.inflate('lo.tar.br'), // /var/task is the default path
       };
 
       setIsLibreOfficeDecompressed(true);
@@ -65,7 +65,7 @@ module.exports.lambdaHandler = async (event) => {
 
     logInfo('S3 file loaded');
 
-    const LAMBDA_WRITABLE_TMP = '../../tmp';
+    const LAMBDA_WRITABLE_TMP = '../../../tmp';
     const SOURCE_FILE_PATH = `${LAMBDA_WRITABLE_TMP}/` + fileName;
 
     try {
